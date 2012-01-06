@@ -4,3 +4,16 @@ require:
     - play
     - play -> secure
     - play -> scaffold 0.1
+    - javase -> com.google.zxing
+    - core -> com.google.zxing
+repositories:
+    - javase:
+        type: local
+        artifact: "${application.path}/jar/[module].jar"
+        contains:
+            - javase -> *
+    - core:
+        type: local
+        artifact: "${application.path}/jar/[module].jar"
+        contains:
+            - core -> *

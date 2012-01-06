@@ -1,0 +1,44 @@
+#{extends 'main.html' /}
+<h2>CBBs</h2>
+<table class="entity CBB">
+	<thead>
+		<tr>
+			<th><!-- actions --></th>
+				<th>Cadena</th>
+				<th>Serie</th>
+				<th>No Aprobacion</th>
+				<th>Folio Inicial</th>
+				<th>Folio Final</th>
+				<th>Folio Siguiente</th>
+				<th>Status</th>
+				<th>Fecha Vigencia</th>
+				<th>Fecha Aprobacion</th>
+				<th>Created</th>
+				<th>Id</th>
+		</tr>
+	</thead>
+	<tbody>
+	#{list items:entities, as:'entity'}
+		<tr>
+			<td>
+				<a href="@{CBBs.show(entity.id)}">Show</a>&nbsp;
+				<a href="@{CBBs.edit(entity.id)}">Edit</a>&nbsp;
+				<a href="@{CBBs.delete(entity.id)}" onclick="if (!confirm('Are you sure you want to delete this record?')) return false;">Delete</a>
+			</td>
+					<td>${entity.cadena}</td>
+					<td>${entity.serie}</td>
+					<td>${entity.noAprobacion}</td>
+					<td>${entity.folioInicial}</td>
+					<td>${entity.folioFinal}</td>
+					<td>${entity.folioSiguiente}</td>
+					<td>${entity.status}</td>
+					<td>${entity.fechaVigencia}</td>
+					<td>${entity.fechaAprobacion}</td>
+					<td>${entity.created}</td>
+					<td>${entity.id}</td>
+		</tr>
+	#{/list}
+	</tbody>
+</table>
+<a href="@{CBBs.create}">Create</a>
+

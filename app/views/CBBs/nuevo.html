@@ -1,0 +1,17 @@
+#{extends 'main.html' /}
+<h2>Create CBB</h2>
+<div class="entity">
+#{form @CBBs.leer(), id:'nuevoForm', enctype:'multipart/form-data'}
+	
+	<div class="row">
+	  <div class="label">Archivo</div>
+	  <div class="field">
+	      <input type="file" name="entity.image" />
+	  </div>
+	  <span class="error">${errors.forKey('entity.image')}</span>
+	</div>
+	
+	<input type="submit" name="submit" value="Save" />
+#{/form}
+</div>
+<a href="@{CBBs.index}">Cancel</a>

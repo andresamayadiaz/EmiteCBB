@@ -1,4 +1,18 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'CBB' /}
 
-#{welcome /}
+<h2>Leer CBB</h2>
+<div class="entity">
+#{form @Application.leerCBB(), id:'leerCBBForm', enctype:'multipart/form-data'}
+	
+	<div class="row">
+	  <div class="label">Archivo</div>
+	  <div class="field">
+	      <input type="file" name="entity" />
+	  </div>
+	  <span class="error">${errors.forKey('entity')}</span>
+	</div>
+	
+	<input type="submit" name="submit" value="Save" />
+#{/form}
+</div>

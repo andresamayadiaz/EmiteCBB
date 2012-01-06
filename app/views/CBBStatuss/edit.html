@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+<h2>Edit CBBStatus</h2>
+<div class="entity">
+#{form @CBBStatuss.update(), id:'createForm'}
+	#{include 'CBBStatuss/_form.html' /}
+	<input type="submit" name="submit" value="Save" />
+#{/form}
+</div>
+<a href="@{CBBStatuss.index}">Cancel</a>
+
