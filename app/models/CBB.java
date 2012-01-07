@@ -26,7 +26,6 @@ import javax.persistence.Entity;
 import play.data.validation.*;
 import play.db.jpa.Model;
 
-@Entity
 public class CBB extends Model {
 	
 	public Blob image;
@@ -47,38 +46,24 @@ public class CBB extends Model {
 	public Integer folioFinal;
 	
 	@Required
-	public Integer folioSiguiente;
-	
-	@Required
-	public CBBStatus.status status;
-	
-	@Required
 	public String fechaVigencia;
 	
 	@Required
 	public String fechaAprobacion;
 	
-	@Required
-	public String created;
-	
 	public void setDatos(String cadena){
 		this.cadena = cadena;
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		this.created = dateFormat.format(date);
 		this.fechaAprobacion = obtenerFechaAprobacion();
 		this.fechaVigencia = obtenerFechaVigencia();
 		this.folioFinal = Integer.parseInt(obtenerFolioFinal());
 		this.folioInicial = Integer.parseInt(obtenerFolioInicial());
-		this.folioSiguiente = Integer.parseInt(obtenerFolioInicial());
 		this.noAprobacion = Integer.parseInt(obtenerNoAprobacion());
 		this.serie = obtenerSerie();
-		this.status = CBBStatus.status.ACTIVO;
 		
 	}
 	
-	public String obtenerCadena(){
+	public String obtenerCadena() throws Exception{
 		String cadena = "";
 		
 		try {
@@ -88,16 +73,16 @@ public class CBB extends Model {
 			binaryBitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(ImageIO.read(new FileInputStream(file)))));
 			Result result = new MultiFormatReader().decode(binaryBitmap);
 			cadena = result.getText();
+			setDatos(cadena);
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
+		} catch (Exception e){
+			throw e;
 		}
 		
 		return cadena;
@@ -170,6 +155,20 @@ public class CBB extends Model {
 	
 	public String toString(){
 		return "CBB (" + this.serie + this.folioInicial + "-" + this.folioFinal + ")";
+	}
+	
+	public boolean esVigente(){
+		Date fechaVigencia = new Date(obtenerFechaVigencia());
+		Logger.debug("fecha Vigencia: " + fechaVigencia.toString());
+		Date fechaActual = new Date();
+		Logger.debug("fecha Actual: " + fechaActual.toString());
+		return ( fechaActual.before(fechaVigencia) );
+	}
+	
+	public boolean esValido(){
+		return ((this.cadena.length() > 0) &&
+				(obtenerFechaAprobacion().length() > 0) && 
+				esVigente());
 	}
 	
 }

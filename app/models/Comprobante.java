@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import play.data.validation.*;
 import play.db.jpa.Model;
 
-@Entity
 public class Comprobante extends Model {
 	
 	public enum tiposDeComprobantes {FACTURA, RECIBO_HONORARIOS, RECIBO_ARRENDAMIENTO}
@@ -22,6 +21,12 @@ public class Comprobante extends Model {
 	public CBB cbb;
 	
 	@Required
+	public String serie;
+	
+	@Required
+	public Integer folio;
+	
+	@Required
 	public Concepto[] conceptos;
 	
 	private Double subTotal = 0.00;
@@ -29,12 +34,14 @@ public class Comprobante extends Model {
 	private Double totalImpuestosTrasladados = 0.00;
 	private Double total;
 	
-	public Comprobante(Emisor emisor, Cliente cliente, Concepto[] conceptos, CBB cbb){
+	public Comprobante(Emisor emisor, Cliente cliente, Concepto[] conceptos, CBB cbb, String Serie, Integer folio){
 		this.emisor = emisor;
 		this.cliente = cliente;
 		this.conceptos = conceptos;
 		this.cbb = cbb;
 		this.tipo = tiposDeComprobantes.FACTURA;
+		this.serie = serie;
+		this.folio = folio;
 		
 		this.subTotal = getSubTotal();
 		this.totalImpuestosRetenidos = getTotalImpuestosRetenidos();
@@ -42,12 +49,14 @@ public class Comprobante extends Model {
 		this.total = getTotal();
 	}
 	
-	public Comprobante(Emisor emisor, Cliente cliente, Concepto[] conceptos, CBB cbb, tiposDeComprobantes tipo){
+	public Comprobante(Emisor emisor, Cliente cliente, Concepto[] conceptos, CBB cbb, String Serie, Integer folio, tiposDeComprobantes tipo){
 		this.emisor = emisor;
 		this.cliente = cliente;
 		this.conceptos = conceptos;
 		this.cbb = cbb;
 		this.tipo = tipo;
+		this.serie = serie;
+		this.folio = folio;
 		
 		this.subTotal = getSubTotal();
 		this.totalImpuestosRetenidos = getTotalImpuestosRetenidos();
@@ -94,10 +103,9 @@ public class Comprobante extends Model {
 	}
 	
 	public boolean esValido(){
-		boolean conceptosValidos = true;
 		for(Concepto concepto : this.conceptos){
 			if(!concepto.esValido()) return false;
 		}
-		return (getTotal() > 0 && this.conceptos.length > 0 && this.cliente.esValido() && this.emisor.esValido());
+		return (getTotal() > 0 && this.conceptos.length > 0 && this.cliente.esValido() && this.emisor.esValido() && this.cbb.esValido());
 	}
 }

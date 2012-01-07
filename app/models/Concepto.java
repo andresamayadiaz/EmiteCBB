@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import play.data.validation.*;
 import play.db.jpa.Model;
 
-@Entity
 public class Concepto extends Model {
 	
 	@Required
@@ -37,8 +36,8 @@ public class Concepto extends Model {
 	public Concepto(String concepto, String unidades, Double cantidad, Double precioUnitario){
 		this.concepto = concepto;
 		this.unidades = unidades;
-		this.cantidad = cantidad;
-		this.precioUnitario = precioUnitario;
+		this.cantidad = (cantidad.isNaN()) ? 0.00 : cantidad ;
+		this.precioUnitario = (precioUnitario.isNaN()) ? 0.00 : precioUnitario ;
 		this.porcentajeIVATrasladado = 0.00;
 		this.importeIVATrasladado = getImporteIVATrasladado();
 		this.importe = getImporte();	
@@ -47,23 +46,32 @@ public class Concepto extends Model {
 	public Concepto(String concepto, String unidades, Double cantidad, Double precioUnitario, Double porcentajeIVATrasladado){
 		this.concepto = concepto;
 		this.unidades = unidades;
-		this.cantidad = cantidad;
-		this.precioUnitario = precioUnitario;
-		this.porcentajeIVATrasladado = porcentajeIVATrasladado;
+		this.cantidad = (cantidad.isNaN()) ? 0.00 : cantidad ;
+		this.precioUnitario = (precioUnitario.isNaN()) ? 0.00 : precioUnitario ;
+		this.porcentajeIVATrasladado = (porcentajeIVATrasladado.isNaN()) ? 0.00 : porcentajeIVATrasladado ;
 		this.importeIVATrasladado = getImporteIVATrasladado();
 		this.importe = getImporte();	
 	}
 	
 	public Double getImporteIVATrasladado(){
+		validar();
 		return (this.cantidad * this.precioUnitario) * this.porcentajeIVATrasladado / 100;
 	}
 	
 	public Double getImporte(){
+		validar();
 		return (this.cantidad * this.precioUnitario) + getImporteIVATrasladado();
 	}
 	
 	public boolean esValido(){
-		return (getImporte() > 0 && this.cantidad > 0);
+		validar();
+		return (getImporte() > 0 && this.cantidad > 0 && this.precioUnitario > 0);
+	}
+	
+	public void validar(){
+		this.cantidad = (this.cantidad == null) ? 0.00 : this.cantidad ;
+		this.precioUnitario = (this.precioUnitario == null) ? 0.00 : this.precioUnitario ;
+		this.porcentajeIVATrasladado = (this.porcentajeIVATrasladado == null) ? 0.00 : this.porcentajeIVATrasladado ;
 	}
 	
 }

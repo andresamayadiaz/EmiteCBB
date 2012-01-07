@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import play.data.validation.*;
 import play.db.jpa.Model;
 
-@Entity
 public class Cliente extends Model {
 	
 	@Required
@@ -53,7 +52,16 @@ public class Cliente extends Model {
 	public String email;
 	
 	public boolean esValido(){
-		return true;
+		return ((this.rfc.length() > 0) && 
+				(this.razonsocial.length() > 0) &&
+				(this.calle.length() > 0) &&
+				(this.noExterior.length() > 0) &&
+				(this.colonia.length() > 0) &&
+				(this.codigoPostal.length() > 0) &&
+				(this.municipio.length() > 0) &&
+				(this.estado.length() > 0) &&
+				(this.pais.length() > 0) &&
+				(this.email.length() > 0));
 	}
 
 }

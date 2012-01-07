@@ -4,6 +4,7 @@ require:
     - play
     - play -> secure
     - play -> scaffold 0.1
+    - play -> pdf 0.9
     - javase -> com.google.zxing
     - core -> com.google.zxing
 repositories:

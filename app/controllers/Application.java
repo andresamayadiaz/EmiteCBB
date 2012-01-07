@@ -1,6 +1,7 @@
 package controllers;
 
 import play.*;
+import play.data.validation.*;
 import play.db.jpa.Blob;
 import play.mvc.*;
 
@@ -32,21 +33,18 @@ public class Application extends Controller {
     
     public static void leerCBB(Blob entity){
     	Gson gson = new Gson();
-    	
+    	CBB cbb = new CBB();
     	try {
     		
-    		File file = entity.getFile();
-			BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(ImageIO.read(new FileInputStream(file)))));
-			Result result = new MultiFormatReader().decode(binaryBitmap);
-			String[] tokens = StringUtils.splitPreserveAllTokens(result.getText(), '|');
-			if(tokens.length<=0 || tokens.length>9){
-				// existe un error con los datos leidos
-				renderJSON(gson.toJson(new models.Error(1, "La imagen no tiene formato CBB correcto.")));
-			}
+    		cbb.image = entity;
+    		CBB cbb2 = new CBB();
+			cbb2.setDatos(cbb.obtenerCadena());
 			
-			CBB cbb = new CBB();
-			cbb.setDatos(result.getText());
-			renderJSON(gson.toJson(cbb));
+			//Logger.debug("CBB VIGENTE: " + cbb.esVigente());
+			Logger.debug("CBB VALIDO: " + cbb.esValido());
+    		Logger.debug("CBB RECIBIDO: " + gson.toJson(cbb));
+    		
+			renderJSON(gson.toJson(cbb2));
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -66,9 +64,16 @@ public class Application extends Controller {
 		}
     }
     
-    public static void emitirComprobante(Comprobante comprobante){
+    public static void emitirComprobante(@Valid Comprobante comprobante){
     	
+    	//Logger.info("EMISOR RFC: " + comprobante.emisor.rfc);
+    	//Logger.info("EMISOR RAZON SOCIAL: " + comprobante.emisor.razonsocial);
+    	//Logger.info("CONCEPTOS LENGTH: " + comprobante.conceptos.length);
+    	//Logger.info("CONCEPTO NOMBRE: " + comprobante.conceptos[0].concepto);
+    	Logger.info("COMPROBANTE RECIBIDO: " + new Gson().toJson(comprobante));
+    	Logger.info("COMPROBANTE VALIDO: " + comprobante.esValido());
     	
+    	index();
     	
     }
 
