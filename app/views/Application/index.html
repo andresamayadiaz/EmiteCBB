@@ -1,6 +1,26 @@
 #{extends 'main.html' /}
 #{set title:'CBB' /}
 
+<div id="header">
+	<div class="wrapper">
+		
+		<div id="logo"><span><img src="/images/logo.gif" alt="EmiteCBB"></span></div>
+		
+		<ul id="loggedout-nav">
+			<li>Emitir</li>
+			<li><a href="/validarCBB">Validar CBB</a><sup>&nbsp;&nbsp;Nuevo!</sup></li>
+		</ul>
+	
+	</div>
+</div>
+
+<div id="pagebar">
+	<div class="wrapper">
+		<h1><!-- --></h1>
+	</div>
+</div>
+
+<!-- 
 <h2>Leer CBB</h2>
 <div class="entity">
 #{form @Application.leerCBB(), id:'leerCBBForm', enctype:'multipart/form-data'}
@@ -16,7 +36,7 @@
 	<input type="submit" name="submit" value="Save" />
 #{/form}
 </div>
-
+ -->
 	<!-- <h3>Archivo CBB</h3>
 	<p>
 		<div class="row">
@@ -28,7 +48,7 @@
 		</div>
 	</p>
 	-->
-
+<!-- START MAIN CONTENT -->
 <div id="maincontent">
 	<div id="wrapper">
 	#{form @Application.emitirComprobante(), id:'emitirComprobanteForm', enctype:'multipart/form-data'}
@@ -150,27 +170,24 @@
 			</fieldset>
 		</div>
 	</div>
-	<div class="clear" />
+	
 	<div class="container_12">
 		<div class="grid_8 prefix_2 suffix_2">
 			<fieldset>
 			<legend>CONCEPTOS</legend>
-			
-			<table class="formtable">
-				<tr>
-					<th><label for="rfc">RFC:</label></th>
-					<td><input type="text" name="comprobante.emisor.rfc" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.rfc')}</td>
-				</tr>
-				<tr class="last">
-					<th><label for="pais">Pais:</label></th>
-					<td><input type="text" name="comprobante.cliente.pais" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.pais')}</td>
-				</tr>
-			</table>
 			</fieldset>
+			hkjhjkhjk
 		</div>
 	</div>
 	#{/form}
+	</div>
+</div>
+<!-- END MAIN CONTENT -->
+<!-- FOOTER -->
+<div id="footer">
+	<div id="wrapper">
+	
+		<p>Copyright SaaSMexico.com | <a href="http://saasmexico.com/">SaaSMexico.com</a> | <a href="http://captivatecnologia.com">Captiva Tecnologia Digital</a></p>
+	
 	</div>
 </div>
