@@ -17,199 +17,7 @@
 #{/form}
 </div>
 
-<hr />
-<h2>EMITIR COMPROBANTE</h2>
-<hr />
-#{form @Application.emitirComprobante(), id:'emitirComprobanteForm', enctype:'multipart/form-data'}
-
-	<h3>Datos Emisor</h3>
-	<p>
-		<div class="row">
-		  <div class="label">RFC</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.rfc" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.rfc')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Razon Social</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.razonsocial" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.razonsocial')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Calle</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.calle" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.calle')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Número Exterior</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.noExterior" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.noExterior')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Número Interior</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.noExterior" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.noInterior')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Colonia</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.colonia" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.colonia')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Código Postal</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.codigoPostal" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.codigoPostal')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Municipio</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.municipio" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.municipio')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Estado</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.estado" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.estado')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Pais</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.emisor.pais" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.emisor.pais')}</span>
-		</div>
-	</p>
-	
-	<h3>Datos Cliente</h3>
-	<p>
-		<div class="row">
-		  <div class="label">RFC</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.rfc" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.rfc')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Razon Social</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.razonsocial" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.razonsocial')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Calle</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.calle" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.calle')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Número Exterior</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.noExterior" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.noExterior')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Número Interior</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.noExterior" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.noInterior')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Colonia</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.colonia" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.colonia')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Código Postal</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.codigoPostal" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.codigoPostal')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Municipio</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.municipio" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.municipio')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Estado</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.estado" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.estado')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Pais</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.cliente.pais" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cliente.pais')}</span>
-		</div>
-	</p>
-	
-	<h3>Concepto</h3>
-	<p>
-		<div class="row">
-		  <div class="label">Concepto</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.conceptos.[0].concepto" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.conceptos.[0].concepto')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Cantidad</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.conceptos.[0].cantidad" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.conceptos.[0].cantidad')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Unidades</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.conceptos.[0].unidades" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.conceptos.[0].unidades')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">Precio Unitario</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.conceptos.[0].precioUnitario" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.conceptos.[0].precioUnitario')}</span>
-		</div>
-		<div class="row">
-		  <div class="label">IVA Trasladado (%)</div>
-		  <div class="field">
-		      <input type="text" name="comprobante.conceptos.[0].porcentajeIVATrasladado" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.conceptos.[0].porcentajeIVATrasladado')}</span>
-		</div>
-	</p>
-	
-	<h3>Archivo CBB</h3>
+	<!-- <h3>Archivo CBB</h3>
 	<p>
 		<div class="row">
 		  <div class="label">Archivo</div>
@@ -219,5 +27,150 @@
 		  <span class="error">${errors.forKey('comprobante.cbb.image')}</span>
 		</div>
 	</p>
-	<input type="submit" name="submit" value="EMITIR" />
-#{/form}
+	-->
+
+<div id="maincontent">
+	<div id="wrapper">
+	#{form @Application.emitirComprobante(), id:'emitirComprobanteForm', enctype:'multipart/form-data'}
+	<div class="container_12">
+	<div class="grid_6">
+			<fieldset>
+			<legend>EMISOR</legend>
+			
+			<table class="formtable">
+				<tr>
+					<th><label for="rfc">RFC:</label></th>
+					<td><input type="text" name="comprobante.emisor.rfc" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.rfc')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="razonsocial">Razon Social:</label></th>
+					<td><input type="text" name="comprobante.emisor.razonsocial" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.razonsocial')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="calle">Calle:</label></th>
+					<td><input type="text" name="email" id="comprobante.emisor.calle" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.calle')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="noExterior">No. Exterior:</label></th>
+					<td><input type="text" name="comprobante.emisor.noExterior" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.noExterior')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="noInterior">No. Interior:</label></th>
+					<td><input type="text" name="comprobante.emisor.noInterior" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.noInterior')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="colonia">Colonia:</label></th>
+					<td><input type="text" name="comprobante.emisor.colonia" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.colonia')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="codigoPostal">Codigo Postal:</label></th>
+					<td><input type="text" name="comprobante.emisor.codigoPostal" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.codigoPostal')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="municipio">Municipio:</label></th>
+					<td><input type="text" name="comprobante.emisor.municipio" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.municipio')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="estado">Estado:</label></th>
+					<td><input type="text" name="comprobante.emisor.estado" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.estado')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="pais">Pais:</label></th>
+					<td><input type="text" name="comprobante.emisor.pais" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.pais')}</td>
+				</tr>
+			</table>
+			</fieldset>
+		</div>
+		<div class="grid_6">
+			<fieldset>
+			<legend>CLIENTE</legend>
+			
+			<table class="formtable">
+				<tr>
+					<th><label for="rfc">RFC:</label></th>
+					<td><input type="text" name="comprobante.cliente.rfc" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.rfc')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="razonsocial">Razon Social:</label></th>
+					<td><input type="text" name="comprobante.cliente.razonsocial" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.razonsocial')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="calle">Calle:</label></th>
+					<td><input type="text" name="email" id="comprobante.cliente.calle" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.calle')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="noExterior">No. Exterior:</label></th>
+					<td><input type="text" name="comprobante.cliente.noExterior" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.noExterior')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="noInterior">No. Interior:</label></th>
+					<td><input type="text" name="comprobante.cliente.noInterior" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.noInterior')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="colonia">Colonia:</label></th>
+					<td><input type="text" name="comprobante.cliente.colonia" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.colonia')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="codigoPostal">Codigo Postal:</label></th>
+					<td><input type="text" name="comprobante.cliente.codigoPostal" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.codigoPostal')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="municipio">Municipio:</label></th>
+					<td><input type="text" name="comprobante.cliente.municipio" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.municipio')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="estado">Estado:</label></th>
+					<td><input type="text" name="comprobante.cliente.estado" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.estado')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="pais">Pais:</label></th>
+					<td><input type="text" name="comprobante.cliente.pais" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.pais')}</td>
+				</tr>
+			</table>
+			</fieldset>
+		</div>
+	</div>
+	<div class="clear" />
+	<div class="container_12">
+		<div class="grid_8 prefix_2 suffix_2">
+			<fieldset>
+			<legend>CONCEPTOS</legend>
+			
+			<table class="formtable">
+				<tr>
+					<th><label for="rfc">RFC:</label></th>
+					<td><input type="text" name="comprobante.emisor.rfc" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.emisor.rfc')}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="pais">Pais:</label></th>
+					<td><input type="text" name="comprobante.cliente.pais" class="textfield" value="" /></td>
+					<td class="error">${errors.forKey('comprobante.cliente.pais')}</td>
+				</tr>
+			</table>
+			</fieldset>
+		</div>
+	</div>
+	#{/form}
+	</div>
+</div>
