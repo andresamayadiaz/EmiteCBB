@@ -1,10 +1,10 @@
 #{extends 'main.html' /}
-#{set title:'CBB' /}
+#{set title:'Emitir CBB' /}
 
 <div id="header">
 	<div class="wrapper">
 		
-		<div id="logo"><span><img src="/images/logo.gif" alt="EmiteCBB"></span></div>
+		<div id="logo"><span><img src="#" alt="EmiteCBB"></span></div> <!-- /public/images/logo.gif -->
 		
 		<ul id="loggedout-nav">
 			<li>Emitir</li>
@@ -20,42 +20,21 @@
 	</div>
 </div>
 
-<!-- 
-<h2>Leer CBB</h2>
-<div class="entity">
-#{form @Application.leerCBB(), id:'leerCBBForm', enctype:'multipart/form-data'}
-	
-	<div class="row">
-	  <div class="label">Archivo</div>
-	  <div class="field">
-	      <input type="file" name="entity" />
-	  </div>
-	  <span class="error">${errors.forKey('entity')}</span>
-	</div>
-	
-	<input type="submit" name="submit" value="Save" />
-#{/form}
-</div>
- -->
-	<!-- <h3>Archivo CBB</h3>
-	<p>
-		<div class="row">
-		  <div class="label">Archivo</div>
-		  <div class="field">
-		      <input type="file" name="comprobante.cbb.image" />
-		  </div>
-		  <span class="error">${errors.forKey('comprobante.cbb.image')}</span>
-		</div>
-	</p>
-	-->
 <!-- START MAIN CONTENT -->
 <div id="maincontent">
 	<div id="wrapper">
 	#{form @Application.emitirComprobante(), id:'emitirComprobanteForm', enctype:'multipart/form-data'}
 	<div class="container_12">
+		<div class="grid_6 prefix_3 suffix_3">
+			<fieldset>
+			<legend>IMAGEN CBB</legend>
+			</fieldset>
+			<input type="file" name="comprobante.cbb.image" />
+			<span class="error">${errors.forKey('comprobante.cbb.image')}</span>
+		</div>
 	<div class="grid_6">
 			<fieldset>
-			<legend>EMISOR</legend>
+			<legend>DATOS DEL EMISOR</legend>
 			
 			<table class="formtable">
 				<tr>
@@ -113,7 +92,7 @@
 		</div>
 		<div class="grid_6">
 			<fieldset>
-			<legend>CLIENTE</legend>
+			<legend>DATOS DEL CLIENTE</legend>
 			
 			<table class="formtable">
 				<tr>
@@ -176,7 +155,39 @@
 			<fieldset>
 			<legend>CONCEPTOS</legend>
 			</fieldset>
-			hkjhjkhjk
+		</div>
+		<div class="row-titles">
+			<div class="grid_4">CONCEPTO</div>
+			<div class="grid_2">CANTIDAD</div>
+			<div class="grid_1">UNIDAD</div>
+			<div class="grid_2">PRECIO UNIT.</div>
+			<div class="grid_2">IVA (%)</div>
+			<div class="grid_1">IMPORTE</div>
+		</div>
+		<div class="conceptos">
+			<div class="row-titles">
+				<div class="grid_4"><textarea></textarea></div>
+				<div class="grid_2"><input type="text" name="comprobante.conceptos[0].concepto" size="10"></input></div>
+				<div class="grid_1"><input type="text" name="comprobante.conceptos[0].cantidad" size="5"></input></div>
+				<div class="grid_2"><input type="text" name="comprobante.conceptos[0].unidades" size="10" ></input></div>
+				<div class="grid_2"><input type="text" name="comprobante.conceptos[0].precioUnitario" size="10"></input></div>
+				<div class="grid_1" align="right">$</div>
+			</div>
+		</div>
+		<div class="container_12">
+			
+			<div class="prefix_8 grid_2" align="right">SubTotal:</div>
+			<div class="grid_2" align="right" style="border-bottom: 1px black solid;">$</div>
+			
+			<div class="prefix_8 grid_2" align="right">IVA:</div>
+			<div class="grid_2" align="right" style="border-bottom: 1px black solid;">$</div>
+			
+			<div class="prefix_8 grid_2" align="right">Total:</div>
+			<div class="grid_2" align="right" style="border-bottom: 1px black solid;">$</div>
+			
+		</div>
+		<div class="container_12">
+			<div class="prefix_5 grid_2 suffix_5"><input type="submit" name="submit" value="EMITIR CBB" class="button" /></div>
 		</div>
 	</div>
 	#{/form}
@@ -186,8 +197,6 @@
 <!-- FOOTER -->
 <div id="footer">
 	<div id="wrapper">
-	
 		<p>Copyright SaaSMexico.com | <a href="http://saasmexico.com/">SaaSMexico.com</a> | <a href="http://captivatecnologia.com">Captiva Tecnologia Digital</a></p>
-	
 	</div>
 </div>
