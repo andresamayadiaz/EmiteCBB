@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Hola</title>
+	<style media="print">
+		#contenedor { 
+			
+		}
+		
+		#datosCliente {
+			margin-top: 10px;
+		}
+		
+		#logo {
+			width: 150px;
+			height: 70px;
+		}
+		
+		.clienteTitulo {
+			font-size: 10px;		
+		}
+		
+		.clienteInfo {
+			font-size: 10px;
+		}
+</head>
+<body>
+	<div id="contenedor">
+		<div id="cabecera">
+			<div>
+				<img id="logo" src="@{'/public/images/captiva.png'}" />
+			</div>
+			<div id="datosCliente">
+				<span class="clienteTitulo">Cliente:&nbsp;</span><strong class="clienteInfo">${ comprobante.cliente.razonsocial }</strong><br />
+				<span class="clienteTitulo">RFC:&nbsp;</span><strong class="clienteInfo">${ comprobante.cliente.rfc }</strong><br />
+				<span class="clienteTitulo">Lugar:&nbsp;</span><strong class="clienteInfo">
+						${ comprobante.cliente.calle }&nbsp;#
+						${ comprobante.cliente.noExterior }&nbsp;
+						${ comprobante.cliente.noInterior },&nbsp;
+						${ comprobante.cliente.colonia },&nbsp;
+						C.P. ${ comprobante.cliente.codigoPostal },&nbsp;
+						${ comprobante.cliente.municipio },&nbsp;
+						${ comprobante.cliente.estado },&nbsp;
+						${ comprobante.cliente.pais }&nbsp;
+					</strong>
+			</div>
+		</div>		
+		<div id="contenido">
+			
+		</div>
+		<div id="pie">
+			
+		</div>
+	</div>
+</body>
+</html>

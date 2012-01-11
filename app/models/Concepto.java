@@ -8,19 +8,19 @@ import play.db.jpa.Model;
 @Entity
 public class Concepto extends Model {
 	
-	@Required
+	@Required(message = "Especifique concepto")
 	@MaxSize(250)
 	public String concepto;
 	
-	@Required
+	@Required(message = "Especifique unidad")
 	@MaxSize(50)
-	public String unidades;
+	public String unidad;
 	
-	@Required
+	@Required(message = "Especifique cantidad")
 	@Min(0)
 	public Double cantidad;
 	
-	@Required
+	@Required(message = "Especifique precio unitario")
 	@Min(0)
 	public Double precioUnitario;
 	
@@ -30,13 +30,13 @@ public class Concepto extends Model {
 	@Min(0)
 	public Double porcentajeIVATrasladado;
 	
-	@Required
+	@Required(message = "Especifique importe")
 	@Min(0)
 	private Double importe;
 	
-	public Concepto(String concepto, String unidades, Double cantidad, Double precioUnitario){
+	public Concepto(String concepto, String unidad, Double cantidad, Double precioUnitario){
 		this.concepto = concepto;
-		this.unidades = unidades;
+		this.unidad = unidad;
 		this.cantidad = (cantidad.isNaN()) ? 0.00 : cantidad ;
 		this.precioUnitario = (precioUnitario.isNaN()) ? 0.00 : precioUnitario ;
 		this.porcentajeIVATrasladado = 0.00;
@@ -44,9 +44,9 @@ public class Concepto extends Model {
 		this.importe = getImporte();	
 	}
 	
-	public Concepto(String concepto, String unidades, Double cantidad, Double precioUnitario, Double porcentajeIVATrasladado){
+	public Concepto(String concepto, String unidad, Double cantidad, Double precioUnitario, Double porcentajeIVATrasladado){
 		this.concepto = concepto;
-		this.unidades = unidades;
+		this.unidad = unidad;
 		this.cantidad = (cantidad.isNaN()) ? 0.00 : cantidad ;
 		this.precioUnitario = (precioUnitario.isNaN()) ? 0.00 : precioUnitario ;
 		this.porcentajeIVATrasladado = (porcentajeIVATrasladado.isNaN()) ? 0.00 : porcentajeIVATrasladado ;

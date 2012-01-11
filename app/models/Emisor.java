@@ -12,42 +12,42 @@ public class Emisor extends Model {
 	@MaxSize(13)
 	public String rfc;
 	
-	@Required
+	@Required(message = "Especifique razón social")
 	@MaxSize(250)
 	public String razonsocial;
 	
-	@Required
+	@Required(message = "Especifique calle")
 	@MaxSize(250)
 	public String calle;
 	
-	@Required
+	@Required(message = "Especifique número exterior")
 	@MaxSize(50)
 	public String noExterior;
 	
 	@MaxSize(50)
 	public String noInterior;
 	
-	@Required
+	@Required(message = "Especifique colonia")
 	@MaxSize(250)
 	public String colonia;
 	
-	@Required
+	@Required(message = "Especifique código postal")
 	@MaxSize(250)
 	public String codigoPostal;
 	
-	@Required
+	@Required(message = "Especifique municipio")
 	@MaxSize(250)
 	public String municipio;
 	
-	@Required
+	@Required(message = "Especifique estado")
 	@MaxSize(250)
 	public String estado;
 	
-	@Required
+	@Required(message = "Especifique país")
 	@MaxSize(250)
 	public String pais;
 	
-	@Required
+	@Required(message = "Especifique email")
 	@Email
 	@MaxSize(250)
 	public String email;
@@ -64,5 +64,4 @@ public class Emisor extends Model {
 				(this.pais.length() > 0) &&
 				(this.email.length() > 0));
 	}
-	
 }

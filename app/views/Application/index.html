@@ -13,7 +13,7 @@
 	
 	</div>
 </div>
-
+${cbb2?.cadena}
 <div id="pagebar">
 	<div class="wrapper">
 		<h1><!-- --></h1>
@@ -30,7 +30,6 @@
 			<legend>IMAGEN CBB</legend>
 			</fieldset>
 			<input id="cbbLoad" type="file" name="entity" />
-			<input id="cbbSubmit" type="submit" style="display: none" />
 			<span class="error">#{error 'entity' /}</span>
 		</div>
 	#{/form}
@@ -42,53 +41,53 @@
 			<table class="formtable">
 				<tr>
 					<th><label for="rfc">RFC:</label></th>
-					<td><input type="text" name="comprobante.emisor.rfc" class="textfield" value="" /></td>
+					<td><input id="emisorRfc" type="text" name="comprobante.emisor.rfc" class="textfield" value="${ comprobante?.emisor?.rfc }" readonly="readonly" /></td>
 					<td class="error">#{error 'emisor.rfc' /}</td>
 				</tr>
 				<tr class="last">
-					<th><label for="razonsocial">Razon Social:</label></th>
-					<td><input type="text" name="comprobante.emisor.razonsocial" class="textfield" value="" /></td>
-					<td class="error"#{error 'emisor.razonsocial' /}</td>
+					<th><label for="razonsocial">Raz&oacute;n Social:</label></th>
+					<td><input type="text" name="comprobante.emisor.razonsocial" class="textfield" value="${ comprobante?.emisor?.razonsocial }" /></td>
+					<td class="error">#{error 'emisor.razonsocial' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="calle">Calle:</label></th>
-					<td><input type="text" name="email" id="comprobante.emisor.calle" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.emisor.calle" class="textfield" value="${ comprobante?.emisor?.calle }" /></td>
 					<td class="error">#{error 'emisor.calle' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="noExterior">No. Exterior:</label></th>
-					<td><input type="text" name="comprobante.emisor.noExterior" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.emisor.noExterior" class="textfield" value="${ comprobante?.emisor?.noExterior }" /></td>
 					<td class="error">#{error 'emisor.noExterior' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="noInterior">No. Interior:</label></th>
-					<td><input type="text" name="comprobante.emisor.noInterior" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.emisor.noInterior" class="textfield" value="${ comprobante?.emisor?.noInterior }" /></td>
 					<td class="error">#{error 'emisor.noInterior' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="colonia">Colonia:</label></th>
-					<td><input type="text" name="comprobante.emisor.colonia" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.emisor.colonia" class="textfield" value="${ comprobante?.emisor?.colonia }" /></td>
 					<td class="error">#{error 'emisor.colonia' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="codigoPostal">Codigo Postal:</label></th>
-					<td><input type="text" name="comprobante.emisor.codigoPostal" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.emisor.codigoPostal" class="textfield" value="${ comprobante?.emisor?.codigoPostal }" /></td>
 					<td class="error">#{error 'emisor.codigoPostal' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="municipio">Municipio:</label></th>
-					<td><input type="text" name="comprobante.emisor.municipio" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.emisor.municipio" class="textfield" value="${ comprobante?.emisor?.municipio }" /></td>
 					<td class="error">#{error 'emisor.municipio' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="estado">Estado:</label></th>
-					<td><input type="text" name="comprobante.emisor.estado" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.emisor.estado" class="textfield" value="${ comprobante?.emisor?.estado }" /></td>
 					<td class="error">#{error 'emisor.estado' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="pais">Pais:</label></th>
-					<td><input type="text" name="comprobante.emisor.pais" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.pais')}</td>
+					<td><input type="text" name="comprobante.emisor.pais" class="textfield" value="${ comprobante?.emisor?.pais }" /></td>
+					<td class="error">#{error 'emisor.pais' /}</td>
 				</tr>
 			</table>
 			</fieldset>
@@ -101,52 +100,52 @@
 				<tr>
 					<th><label for="rfc">RFC:</label></th>
 					<td><input type="text" name="comprobante.cliente.rfc" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.rfc')}</td>
+					<td class="error">#{error 'cliente.rfc' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="razonsocial">Razon Social:</label></th>
 					<td><input type="text" name="comprobante.cliente.razonsocial" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.razonsocial')}</td>
+					<td class="error">#{error 'cliente.razonsocial' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="calle">Calle:</label></th>
-					<td><input type="text" name="email" id="comprobante.cliente.calle" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.calle')}</td>
+					<td><input type="text" name="comprobante.cliente.calle" class="textfield" value="" /></td>
+					<td class="error">#{error 'cliente.calle' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="noExterior">No. Exterior:</label></th>
 					<td><input type="text" name="comprobante.cliente.noExterior" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.noExterior')}</td>
+					<td class="error">#{error 'cliente.noExterior' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="noInterior">No. Interior:</label></th>
 					<td><input type="text" name="comprobante.cliente.noInterior" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.noInterior')}</td>
+					<td class="error">#{error 'cliente.noInterior' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="colonia">Colonia:</label></th>
 					<td><input type="text" name="comprobante.cliente.colonia" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.colonia')}</td>
+					<td class="error">#{error 'cliente.colonia' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="codigoPostal">Codigo Postal:</label></th>
 					<td><input type="text" name="comprobante.cliente.codigoPostal" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.codigoPostal')}</td>
+					<td class="error">#{error 'cliente.codigoPostal' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="municipio">Municipio:</label></th>
 					<td><input type="text" name="comprobante.cliente.municipio" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.municipio')}</td>
+					<td class="error">#{error 'cliente.municipio' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="estado">Estado:</label></th>
 					<td><input type="text" name="comprobante.cliente.estado" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.estado')}</td>
+					<td class="error">#{error 'cliente.estado' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="pais">Pais:</label></th>
 					<td><input type="text" name="comprobante.cliente.pais" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.cliente.pais')}</td>
+					<td class="error">#{error 'cliente.pais' /}</td>
 				</tr>
 			</table>
 			</fieldset>
@@ -169,24 +168,24 @@
 		</div>
 		<div class="conceptos">
 			<div class="row-titles">
-				<div class="grid_4"><textarea></textarea></div>
-				<div class="grid_2"><input type="text" name="comprobante.conceptos[0].concepto" size="10"></input></div>
-				<div class="grid_1"><input type="text" name="comprobante.conceptos[0].cantidad" size="5"></input></div>
-				<div class="grid_2"><input type="text" name="comprobante.conceptos[0].unidades" size="10" ></input></div>
-				<div class="grid_2"><input type="text" name="comprobante.conceptos[0].precioUnitario" size="10"></input></div>
-				<div class="grid_1" align="right">$</div>
+				<div class="grid_4"><textarea name="comprobante.conceptos[0].concepto"></textarea></div>
+				<div class="grid_2"><input id="cantidad" type="text" name="comprobante.conceptos[0].cantidad" size="10"></input></div>
+				<div class="grid_1"><input type="text" name="comprobante.conceptos[0].unidad" size="5"></input></div>
+				<div class="grid_2"><input id="precioUnitario" type="text" name="comprobante.conceptos[0].precioUnitario" size="10" ></input></div>
+				<div class="grid_2"><input id="ivaPorcentaje" type="text" name="comprobante.conceptos[0].porcentajeIVATrasladado" size="10"></input></div>
+				<div id="importe" class="grid_1" align="right"></div>
 			</div>
 		</div>
 		<div class="container_12">
 			
 			<div class="prefix_8 grid_2" align="right">SubTotal:</div>
-			<div class="grid_2" align="right" style="border-bottom: 1px black solid;">$</div>
+			<div id="subtotal" class="grid_2" align="right" style="border-bottom: 1px black solid;"></div>
 			
 			<div class="prefix_8 grid_2" align="right">IVA:</div>
-			<div class="grid_2" align="right" style="border-bottom: 1px black solid;">$</div>
+			<div id="iva" class="grid_2" align="right" style="border-bottom: 1px black solid;"></div>
 			
 			<div class="prefix_8 grid_2" align="right">Total:</div>
-			<div class="grid_2" align="right" style="border-bottom: 1px black solid;">$</div>
+			<div id="total" class="grid_2" align="right" style="border-bottom: 1px black solid;"></div>
 			
 		</div>
 		<div class="container_12">
@@ -209,7 +208,60 @@
 </div>
 
 <script type="text/javascript">
-   	$('#cbbLoad').change(function() {
-   		$.POST
-	});
+	/*
+	 * File upload
+	 */
+	$(function() {
+		$('#leerCBBForm').ajaxForm({
+			success: OnSuccess
+		});
+		
+		$('#cbbLoad').change(function() {
+   			$('#leerCBBForm').submit();
+		});
+		
+		function OnSuccess(response, status) {
+			// 1: Rfc, 2: noAprobacion, 3: folioInicial, 4: folioFinal, 5: serie, 6: fechaEmision, 7: fechaVigencia
+			var data = response.cadena.split('|');
+			$('#emisorRfc').val(data[1]);
+		}
+    });
+    
+    /*
+     * Calc
+     */
+    $(function() {
+    	var cantidad = 0;
+    	var precioUni = 0;
+    	var iva = 0;
+    	var importe = 0;
+    	var ivaPorciento = 0;
+    	
+    	calcular(cantidad, precioUni, ivaPorciento);
+    	
+    	$('#cantidad').keyup(function() {
+    		cantidad = $(this).val();
+    		calcular(cantidad, precioUni, ivaPorciento);
+    	});
+    	
+    	$('#precioUnitario').keyup(function() {
+    		precioUni = $(this).val();
+    		calcular(cantidad, precioUni, ivaPorciento);
+    	});
+    	
+    	$('#ivaPorcentaje').keyup(function() {
+    		ivaPorciento = $(this).val();
+    		calcular(cantidad, precioUni, ivaPorciento);
+    	});
+    	
+    	function calcular(cantidad, precioUni, ivaPorciento) {
+    		var importe = cantidad * precioUni;
+    		var iva = importe * (ivaPorciento / 100);
+    		var total = importe + iva;
+    		$('#importe').text(importe + " $");
+    		$('#subtotal').text(importe + " $");
+    		$('#iva').text(iva + " $");
+    		$('#total').text(total + " $");
+    	}
+    });
 </script>

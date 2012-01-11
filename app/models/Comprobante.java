@@ -71,7 +71,7 @@ public class Comprobante extends Model {
 	
 	public Double getTotalImpuestosRetenidos(){
 		// No Implementado
-		return 0.01;
+		return 0.00;
 	}
 	
 	public Double getTotalImpuestosTrasladados(){

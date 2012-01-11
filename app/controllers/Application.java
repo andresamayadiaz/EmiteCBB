@@ -1,6 +1,8 @@
 package controllers;
 
 import play.*;
+
+import static play.modules.pdf.PDF.*;
 import play.data.validation.*;
 import play.data.validation.Error;
 import play.data.validation.Validation.ValidationResult;
@@ -30,41 +32,21 @@ import com.google.zxing.common.HybridBinarizer;
 import models.*;
 
 public class Application extends Controller {
-
+	
     public static void index() {
         render();
     }
     
     public static void leerCBB(Blob entity){
-    	Gson gson = new Gson();
-    	CBB cbb = new CBB();
     	try {
-    		Logger.info("CBB: ", entity.getUUID());
-    		cbb.image = entity;
-    		CBB cbb2 = new CBB();
-			cbb2.setDatos(cbb.obtenerCadena());
-			
-			//Logger.debug("CBB VIGENTE: " + cbb.esVigente());
-			Logger.debug("CBB VALIDO: " + cbb.esValido());
-    		Logger.debug("CBB RECIBIDO: " + gson.toJson(cbb));
-    		
-			renderJSON(gson.toJson(cbb2));
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			renderJSON(gson.toJson(new models.Error(2, e.toString())));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			renderJSON(gson.toJson(new models.Error(3, e.toString())));
-		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			renderJSON(gson.toJson(new models.Error(4, e.toString())));
+    		CBB recibido = new CBB();
+    		CBB respuesta = new CBB();
+    		recibido.image = entity;
+    		respuesta.setDatos(recibido.obtenerCadena());
+    		renderJSON(respuesta);
 		} catch (Exception e){
 			e.printStackTrace();
-			renderJSON(gson.toJson(new models.Error(5, "Imposible leer imagen, verifique el formato y pruebe nuevamente")));
+			renderJSON(new Gson().toJson(new models.Error(1, "Imposible leer imagen, verifique el formato y pruebe nuevamente")));
 		}
     }
     
@@ -74,28 +56,22 @@ public class Application extends Controller {
     		validation.valid("cliente", comprobante.cliente);
     		
     		if(validation.hasErrors()) {
-    			Logger.debug("Entra");
+    			params.flash();
+    			validation.keep();
     			
-    			params.flash(); // add http parameters to the flash scope
-    			validation.keep(); // keep the errors for the next request
+    			Options options = new Options();
+    			options.filename = "test.pdf";
     			
-    			for(Error error : validation.errors()) {
-    				Logger.debug(error.getKey());
-    			}
-    			
-    			index();
-    	      }
-    		
-	    	// Verificar validación
-	    	Logger.debug("COMPROBANTE RECIBIDO: " + new Gson().toJson(comprobante));
-	    	//Logger.info("COMPROBANTE VALIDO: " + comprobante.esValido());
+    			renderPDF(comprobante, options, "hola");
+    			//renderTemplate("Application/index.html", comprobante);
+    		}
 	    	
 	    	// Leer CBB
-	    	CBB myCbb = new CBB();
-	    	myCbb.setDatos(comprobante.cbb.obtenerCadena());
-	    	Logger.debug("CBB JSON: " + new Gson().toJson(myCbb));
+	    	CBB cbb = new CBB();
+	    	cbb.setDatos(comprobante.cbb.obtenerCadena());
+	    	Logger.debug("CBB: " + new Gson().toJson(cbb));
 	    	
-	    	index();
+	    	//render(comprobante);
     	} catch (Exception ex) {
     		Logger.info(ex.getMessage());
     		index();

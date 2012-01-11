@@ -160,9 +160,7 @@ public class CBB extends Model {
 	
 	public boolean esVigente(){
 		Date fechaVigencia = new Date(obtenerFechaVigencia());
-		Logger.debug("fecha Vigencia: " + fechaVigencia.toString());
 		Date fechaActual = new Date();
-		Logger.debug("fecha Actual: " + fechaActual.toString());
 		return ( fechaActual.before(fechaVigencia) );
 	}
 	
