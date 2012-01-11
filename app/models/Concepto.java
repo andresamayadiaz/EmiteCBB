@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import play.data.validation.*;
 import play.db.jpa.Model;
 
+@Entity
 public class Concepto extends Model {
 	
 	@Required
-	@MaxSize(150)
+	@MaxSize(250)
 	public String concepto;
 	
 	@Required

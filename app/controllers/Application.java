@@ -2,6 +2,8 @@ package controllers;
 
 import play.*;
 import play.data.validation.*;
+import play.data.validation.Error;
+import play.data.validation.Validation.ValidationResult;
 import play.db.jpa.Blob;
 import play.mvc.*;
 
@@ -12,6 +14,8 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.imageio.ImageIO;
+
+import net.sf.oval.guard.PostCheck;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -35,7 +39,7 @@ public class Application extends Controller {
     	Gson gson = new Gson();
     	CBB cbb = new CBB();
     	try {
-    		
+    		Logger.info("CBB: ", entity.getUUID());
     		cbb.image = entity;
     		CBB cbb2 = new CBB();
 			cbb2.setDatos(cbb.obtenerCadena());
@@ -64,17 +68,37 @@ public class Application extends Controller {
 		}
     }
     
-    public static void emitirComprobante(@Valid Comprobante comprobante){
-    	
-    	//Logger.info("EMISOR RFC: " + comprobante.emisor.rfc);
-    	//Logger.info("EMISOR RAZON SOCIAL: " + comprobante.emisor.razonsocial);
-    	//Logger.info("CONCEPTOS LENGTH: " + comprobante.conceptos.length);
-    	//Logger.info("CONCEPTO NOMBRE: " + comprobante.conceptos[0].concepto);
-    	Logger.info("COMPROBANTE RECIBIDO: " + new Gson().toJson(comprobante));
-    	Logger.info("COMPROBANTE VALIDO: " + comprobante.esValido());
-    	
-    	index();
-    	
+    public static void emitir(@Valid Comprobante comprobante) {
+    	try {
+    		validation.valid("emisor", comprobante.emisor);
+    		validation.valid("cliente", comprobante.cliente);
+    		
+    		if(validation.hasErrors()) {
+    			Logger.debug("Entra");
+    			
+    			params.flash(); // add http parameters to the flash scope
+    			validation.keep(); // keep the errors for the next request
+    			
+    			for(Error error : validation.errors()) {
+    				Logger.debug(error.getKey());
+    			}
+    			
+    			index();
+    	      }
+    		
+	    	// Verificar validación
+	    	Logger.debug("COMPROBANTE RECIBIDO: " + new Gson().toJson(comprobante));
+	    	//Logger.info("COMPROBANTE VALIDO: " + comprobante.esValido());
+	    	
+	    	// Leer CBB
+	    	CBB myCbb = new CBB();
+	    	myCbb.setDatos(comprobante.cbb.obtenerCadena());
+	    	Logger.debug("CBB JSON: " + new Gson().toJson(myCbb));
+	    	
+	    	index();
+    	} catch (Exception ex) {
+    		Logger.info(ex.getMessage());
+    		index();
+    	}
     }
-
 }

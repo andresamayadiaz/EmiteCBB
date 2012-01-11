@@ -23,15 +23,18 @@
 <!-- START MAIN CONTENT -->
 <div id="maincontent">
 	<div id="wrapper">
-	#{form @Application.emitirComprobante(), id:'emitirComprobanteForm', enctype:'multipart/form-data'}
 	<div class="container_12">
+	#{form @Application.leerCBB(), id: 'leerCBBForm', enctype: 'multipart/form-data' }
 		<div class="grid_6 prefix_3 suffix_3">
 			<fieldset>
 			<legend>IMAGEN CBB</legend>
 			</fieldset>
-			<input type="file" name="comprobante.cbb.image" />
-			<span class="error">${errors.forKey('comprobante.cbb.image')}</span>
+			<input id="cbbLoad" type="file" name="entity" />
+			<input id="cbbSubmit" type="submit" style="display: none" />
+			<span class="error">#{error 'entity' /}</span>
 		</div>
+	#{/form}
+	#{form @Application.emitir(), id:'emitirComprobanteForm', enctype:'multipart/form-data'}
 	<div class="grid_6">
 			<fieldset>
 			<legend>DATOS DEL EMISOR</legend>
@@ -40,47 +43,47 @@
 				<tr>
 					<th><label for="rfc">RFC:</label></th>
 					<td><input type="text" name="comprobante.emisor.rfc" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.rfc')}</td>
+					<td class="error">#{error 'emisor.rfc' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="razonsocial">Razon Social:</label></th>
 					<td><input type="text" name="comprobante.emisor.razonsocial" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.razonsocial')}</td>
+					<td class="error"#{error 'emisor.razonsocial' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="calle">Calle:</label></th>
 					<td><input type="text" name="email" id="comprobante.emisor.calle" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.calle')}</td>
+					<td class="error">#{error 'emisor.calle' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="noExterior">No. Exterior:</label></th>
 					<td><input type="text" name="comprobante.emisor.noExterior" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.noExterior')}</td>
+					<td class="error">#{error 'emisor.noExterior' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="noInterior">No. Interior:</label></th>
 					<td><input type="text" name="comprobante.emisor.noInterior" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.noInterior')}</td>
+					<td class="error">#{error 'emisor.noInterior' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="colonia">Colonia:</label></th>
 					<td><input type="text" name="comprobante.emisor.colonia" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.colonia')}</td>
+					<td class="error">#{error 'emisor.colonia' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="codigoPostal">Codigo Postal:</label></th>
 					<td><input type="text" name="comprobante.emisor.codigoPostal" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.codigoPostal')}</td>
+					<td class="error">#{error 'emisor.codigoPostal' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="municipio">Municipio:</label></th>
 					<td><input type="text" name="comprobante.emisor.municipio" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.municipio')}</td>
+					<td class="error">#{error 'emisor.municipio' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="estado">Estado:</label></th>
 					<td><input type="text" name="comprobante.emisor.estado" class="textfield" value="" /></td>
-					<td class="error">${errors.forKey('comprobante.emisor.estado')}</td>
+					<td class="error">#{error 'emisor.estado' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="pais">Pais:</label></th>
@@ -200,3 +203,13 @@
 		<p>Copyright SaaSMexico.com | <a href="http://saasmexico.com/">SaaSMexico.com</a> | <a href="http://captivatecnologia.com">Captiva Tecnologia Digital</a></p>
 	</div>
 </div>
+
+<div id="testingAJAX">
+
+</div>
+
+<script type="text/javascript">
+   	$('#cbbLoad').change(function() {
+   		$.POST
+	});
+</script>

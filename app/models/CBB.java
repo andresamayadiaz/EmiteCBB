@@ -24,8 +24,9 @@ import javax.imageio.ImageIO;
 import javax.persistence.Entity;
 
 import play.data.validation.*;
-import play.db.jpa.Model;
+import play.db.jpa.*;
 
+@Entity
 public class CBB extends Model {
 	
 	public Blob image;
@@ -81,7 +82,7 @@ public class CBB extends Model {
 			throw e;
 		} catch (NotFoundException e) {
 			throw e;
-		} catch (Exception e){
+		} catch (Exception e) {
 			throw e;
 		}
 		
@@ -167,7 +168,7 @@ public class CBB extends Model {
 	
 	public boolean esValido(){
 		return ((this.cadena.length() > 0) &&
-				(obtenerFechaAprobacion().length() > 0) && 
+				(obtenerFechaAprobacion().length() > 0) &&
 				esVigente());
 	}
 	

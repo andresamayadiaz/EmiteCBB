@@ -1,10 +1,14 @@
 package models;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import play.data.validation.*;
 import play.db.jpa.Model;
 
+@Entity
 public class Comprobante extends Model {
 	
 	public enum tiposDeComprobantes {FACTURA, RECIBO_HONORARIOS, RECIBO_ARRENDAMIENTO}
@@ -27,20 +31,21 @@ public class Comprobante extends Model {
 	public Integer folio;
 	
 	@Required
-	public Concepto[] conceptos;
+	@OneToMany(targetEntity = Concepto.class)
+	public Collection<Concepto> conceptos;
 	
 	private Double subTotal = 0.00;
 	private Double totalImpuestosRetenidos = 0.00;
 	private Double totalImpuestosTrasladados = 0.00;
 	private Double total;
 	
-	public Comprobante(Emisor emisor, Cliente cliente, Concepto[] conceptos, CBB cbb, String Serie, Integer folio){
+	public Comprobante(Emisor emisor, Cliente cliente, Collection<Concepto> conceptos, CBB cbb, String Serie, Integer folio){
 		this.emisor = emisor;
 		this.cliente = cliente;
 		this.conceptos = conceptos;
 		this.cbb = cbb;
 		this.tipo = tiposDeComprobantes.FACTURA;
-		this.serie = serie;
+		this.serie = Serie;
 		this.folio = folio;
 		
 		this.subTotal = getSubTotal();
@@ -49,13 +54,13 @@ public class Comprobante extends Model {
 		this.total = getTotal();
 	}
 	
-	public Comprobante(Emisor emisor, Cliente cliente, Concepto[] conceptos, CBB cbb, String Serie, Integer folio, tiposDeComprobantes tipo){
+	public Comprobante(Emisor emisor, Cliente cliente, Collection<Concepto> conceptos, CBB cbb, String Serie, Integer folio, tiposDeComprobantes tipo){
 		this.emisor = emisor;
 		this.cliente = cliente;
 		this.conceptos = conceptos;
 		this.cbb = cbb;
 		this.tipo = tipo;
-		this.serie = serie;
+		this.serie = Serie;
 		this.folio = folio;
 		
 		this.subTotal = getSubTotal();
@@ -66,7 +71,7 @@ public class Comprobante extends Model {
 	
 	public Double getTotalImpuestosRetenidos(){
 		// No Implementado
-		return 0.00;
+		return 0.01;
 	}
 	
 	public Double getTotalImpuestosTrasladados(){
@@ -102,10 +107,14 @@ public class Comprobante extends Model {
 		}
 	}
 	
-	public boolean esValido(){
+	public boolean esValido() throws Exception{
 		for(Concepto concepto : this.conceptos){
 			if(!concepto.esValido()) return false;
 		}
-		return (getTotal() > 0 && this.conceptos.length > 0 && this.cliente.esValido() && this.emisor.esValido() && this.cbb.esValido());
+		
+		if (this.emisor.rfc != this.cbb.obtenerRFC())
+			return false;
+		
+		return (getTotal() > 0 && this.conceptos.size() > 0 && this.cliente.esValido() && this.emisor.esValido() && this.cbb.esValido());
 	}
 }

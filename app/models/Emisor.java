@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import play.data.validation.*;
 import play.db.jpa.Model;
 
+@Entity
 public class Emisor extends Model {
 
-	@Required
-	@MaxSize(15)
+	@Required(message = "Especifique rfc")
+	@MaxSize(13)
 	public String rfc;
 	
 	@Required

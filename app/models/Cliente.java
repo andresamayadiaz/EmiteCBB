@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import play.data.validation.*;
 import play.db.jpa.Model;
 
+@Entity
 public class Cliente extends Model {
 	
 	@Required
