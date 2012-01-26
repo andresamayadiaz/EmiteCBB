@@ -59,22 +59,25 @@ public class Application extends Controller {
     			params.flash();
     			validation.keep();
     			
-    			Options options = new Options();
-    			options.filename = "test.pdf";
+    			for(Error error : validation.errors()) {
+    	             Logger.debug(error.getKey() + ": " + error.message());
+    	        }
     			
-    			renderPDF(comprobante, options, "hola");
-    			//renderTemplate("Application/index.html", comprobante);
+    			renderTemplate("Application/index.html", comprobante);
     		}
+    		
+    		Logger.info("Comprobante: " + new Gson().toJson(comprobante));
 	    	
-	    	// Leer CBB
-	    	CBB cbb = new CBB();
-	    	cbb.setDatos(comprobante.cbb.obtenerCadena());
-	    	Logger.debug("CBB: " + new Gson().toJson(cbb));
-	    	
-	    	//render(comprobante);
+	    	impresion(comprobante);
     	} catch (Exception ex) {
     		Logger.info(ex.getMessage());
     		index();
     	}
+    }
+    
+    public static void impresion(Comprobante comprobante) {
+    	Options options = new Options();
+		options.filename = "emision.pdf";
+    	renderPDF("Application/emitir.html", comprobante);
     }
 }

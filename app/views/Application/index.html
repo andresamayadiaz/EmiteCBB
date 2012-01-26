@@ -29,11 +29,12 @@ ${cbb2?.cadena}
 			<fieldset>
 			<legend>IMAGEN CBB</legend>
 			</fieldset>
-			<input id="cbbLoad" type="file" name="entity" />
+			<input id="cbbLoad" type="file" name="entity" /><br />
+			<label id="errorCbb" class="error"></label>
 			<span class="error">#{error 'entity' /}</span>
 		</div>
 	#{/form}
-	#{form @Application.emitir(), id:'emitirComprobanteForm', enctype:'multipart/form-data'}
+	#{form @Application.emitir(), id:'emitirComprobanteForm', enctype:'multipart/form-data', method:'POST'}
 	<div class="grid_6">
 			<fieldset>
 			<legend>DATOS DEL EMISOR</legend>
@@ -89,6 +90,11 @@ ${cbb2?.cadena}
 					<td><input type="text" name="comprobante.emisor.pais" class="textfield" value="${ comprobante?.emisor?.pais }" /></td>
 					<td class="error">#{error 'emisor.pais' /}</td>
 				</tr>
+				<tr class="last">
+					<th><label for="email">Email:</label></th>
+					<td><input type="text" name="comprobante.emisor.email" class="textfield" value="${ comprobante?.emisor?.email }" /></td>
+					<td class="error">#{error 'emisor.email' /}</td>
+				</tr>
 			</table>
 			</fieldset>
 		</div>
@@ -99,53 +105,58 @@ ${cbb2?.cadena}
 			<table class="formtable">
 				<tr>
 					<th><label for="rfc">RFC:</label></th>
-					<td><input type="text" name="comprobante.cliente.rfc" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.rfc" class="textfield" value="${comprobante?.cliente?.rfc}" /></td>
 					<td class="error">#{error 'cliente.rfc' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="razonsocial">Razon Social:</label></th>
-					<td><input type="text" name="comprobante.cliente.razonsocial" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.razonsocial" class="textfield" value="${comprobante?.cliente?.razonsocial}" /></td>
 					<td class="error">#{error 'cliente.razonsocial' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="calle">Calle:</label></th>
-					<td><input type="text" name="comprobante.cliente.calle" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.calle" class="textfield" value="${comprobante?.cliente?.calle}" /></td>
 					<td class="error">#{error 'cliente.calle' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="noExterior">No. Exterior:</label></th>
-					<td><input type="text" name="comprobante.cliente.noExterior" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.noExterior" class="textfield" value="${comprobante?.cliente?.noExterior}" /></td>
 					<td class="error">#{error 'cliente.noExterior' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="noInterior">No. Interior:</label></th>
-					<td><input type="text" name="comprobante.cliente.noInterior" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.noInterior" class="textfield" value="${comprobante?.cliente?.noInterior}" /></td>
 					<td class="error">#{error 'cliente.noInterior' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="colonia">Colonia:</label></th>
-					<td><input type="text" name="comprobante.cliente.colonia" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.colonia" class="textfield" value="${comprobante?.cliente?.colonia}" /></td>
 					<td class="error">#{error 'cliente.colonia' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="codigoPostal">Codigo Postal:</label></th>
-					<td><input type="text" name="comprobante.cliente.codigoPostal" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.codigoPostal" class="textfield" value="${comprobante?.cliente?.codigoPostal}" /></td>
 					<td class="error">#{error 'cliente.codigoPostal' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="municipio">Municipio:</label></th>
-					<td><input type="text" name="comprobante.cliente.municipio" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.municipio" class="textfield" value="${comprobante?.cliente?.municipio}" /></td>
 					<td class="error">#{error 'cliente.municipio' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="estado">Estado:</label></th>
-					<td><input type="text" name="comprobante.cliente.estado" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.estado" class="textfield" value="${comprobante?.cliente?.estado}" /></td>
 					<td class="error">#{error 'cliente.estado' /}</td>
 				</tr>
 				<tr class="last">
 					<th><label for="pais">Pais:</label></th>
-					<td><input type="text" name="comprobante.cliente.pais" class="textfield" value="" /></td>
+					<td><input type="text" name="comprobante.cliente.pais" class="textfield" value="${comprobante?.cliente?.pais}" /></td>
 					<td class="error">#{error 'cliente.pais' /}</td>
+				</tr>
+				<tr class="last">
+					<th><label for="email">Email:</label></th>
+					<td><input type="text" name="comprobante.cliente.email" class="textfield" value="${comprobante?.cliente?.email}" /></td>
+					<td class="error">#{error 'cliente.email' /}</td>
 				</tr>
 			</table>
 			</fieldset>
@@ -221,9 +232,16 @@ ${cbb2?.cadena}
 		});
 		
 		function OnSuccess(response, status) {
-			// 1: Rfc, 2: noAprobacion, 3: folioInicial, 4: folioFinal, 5: serie, 6: fechaEmision, 7: fechaVigencia
-			var data = response.cadena.split('|');
-			$('#emisorRfc').val(data[1]);
+			var data;
+			
+			try {
+				// 1: Rfc, 2: noAprobacion, 3: folioInicial, 4: folioFinal, 5: serie, 6: fechaEmision, 7: fechaVigencia
+				data = response.cadena.split('|');
+				$('#emisorRfc').val(data[1]);
+				$('#errorCbb').text("");
+			} catch (ex) {
+				$('#errorCbb').text(response.mensaje); 
+			}
 		}
     });
     

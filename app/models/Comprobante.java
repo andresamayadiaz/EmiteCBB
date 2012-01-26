@@ -15,22 +15,22 @@ public class Comprobante extends Model {
 	
 	public tiposDeComprobantes tipo;
 	
-	@Required
+	
 	public Emisor emisor;
 	
-	@Required
+	
 	public Cliente cliente;
 	
-	@Required
+	
 	public CBB cbb;
 	
-	@Required
+	
 	public String serie;
 	
-	@Required
+	
 	public Integer folio;
 	
-	@Required
+	
 	@OneToMany(targetEntity = Concepto.class)
 	public Collection<Concepto> conceptos;
 	
