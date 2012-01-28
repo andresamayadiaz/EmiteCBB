@@ -68,7 +68,6 @@ public class CBB extends Model {
 		String cadena = "";
 		
 		try {
-			
 			File file = this.image.getFile();
 			BinaryBitmap binaryBitmap;
 			binaryBitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(ImageIO.read(new FileInputStream(file)))));

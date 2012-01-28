@@ -2,8 +2,10 @@ package models;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import play.data.validation.*;
 import play.db.jpa.Model;
@@ -15,29 +17,37 @@ public class Comprobante extends Model {
 	
 	public tiposDeComprobantes tipo;
 	
-	
+	@Required
+	@Valid
+	@OneToOne(targetEntity = Emisor.class, cascade = CascadeType.ALL)
 	public Emisor emisor;
 	
-	
+	@Required
+	@Valid
+	@OneToOne(targetEntity = Cliente.class, cascade = CascadeType.ALL)
 	public Cliente cliente;
 	
-	
+	@Required
+	@Valid
+	@OneToOne(targetEntity = CBB.class, cascade = CascadeType.ALL)
 	public CBB cbb;
-	
 	
 	public String serie;
 	
-	
 	public Integer folio;
 	
-	
-	@OneToMany(targetEntity = Concepto.class)
+	@Required
+	@OneToMany(targetEntity = Concepto.class, cascade = CascadeType.ALL)
 	public Collection<Concepto> conceptos;
 	
 	private Double subTotal = 0.00;
 	private Double totalImpuestosRetenidos = 0.00;
 	private Double totalImpuestosTrasladados = 0.00;
 	private Double total;
+	
+	public Comprobante() {
+		
+	}
 	
 	public Comprobante(Emisor emisor, Cliente cliente, Collection<Concepto> conceptos, CBB cbb, String Serie, Integer folio){
 		this.emisor = emisor;
@@ -83,7 +93,7 @@ public class Comprobante extends Model {
 	}
 	
 	public Double getSubTotal(){
-		Double sumaImportes = 0.00;
+		Double sumaImportes = 0.0;
 		for(Concepto concepto : this.conceptos ){
 			sumaImportes += concepto.getImporte();
 		}

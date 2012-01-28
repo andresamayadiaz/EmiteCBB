@@ -61,7 +61,7 @@ public class Concepto extends Model {
 	
 	public Double getImporte(){
 		validar();
-		return (this.cantidad * this.precioUnitario) + getImporteIVATrasladado();
+		return (this.cantidad * this.precioUnitario);
 	}
 	
 	public boolean esValido(){

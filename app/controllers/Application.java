@@ -8,6 +8,7 @@ import play.data.validation.Error;
 import play.data.validation.Validation.ValidationResult;
 import play.db.jpa.Blob;
 import play.mvc.*;
+import play.vfs.VirtualFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,45 +40,62 @@ public class Application extends Controller {
     
     public static void leerCBB(Blob entity){
     	try {
+    		if (entity == null) {
+    			throw new Exception();
+    		}
+    		
     		CBB recibido = new CBB();
-    		CBB respuesta = new CBB();
     		recibido.image = entity;
-    		respuesta.setDatos(recibido.obtenerCadena());
-    		renderJSON(respuesta);
+    		recibido.setDatos(recibido.obtenerCadena());
+    		renderJSON(recibido);
 		} catch (Exception e){
 			e.printStackTrace();
 			renderJSON(new Gson().toJson(new models.Error(1, "Imposible leer imagen, verifique el formato y pruebe nuevamente")));
 		}
     }
     
-    public static void emitir(@Valid Comprobante comprobante) {
+    public static void emitir(Comprobante comprobante) {
     	try {
-    		validation.valid("emisor", comprobante.emisor);
-    		validation.valid("cliente", comprobante.cliente);
-    		
-    		if(validation.hasErrors()) {
-    			params.flash();
-    			validation.keep();
-    			
-    			for(Error error : validation.errors()) {
-    	             Logger.debug(error.getKey() + ": " + error.message());
-    	        }
-    			
-    			renderTemplate("Application/index.html", comprobante);
+    		if (comprobante.cbb == null) {
+    			validation.addError("comprobante.cbb.image", "Seleccione su imagen CBB");
+    			throw new Exception("Imagen CBB no seleccionada");
     		}
     		
-    		Logger.info("Comprobante: " + new Gson().toJson(comprobante));
-	    	
-	    	impresion(comprobante);
+    		comprobante.cbb.obtenerCadena();
+    		
+    		validation.valid(comprobante);
+    		
+    		if (!comprobante.emisor.rfc.equalsIgnoreCase((comprobante.cbb.obtenerRFC()))) {
+    			validation.addError("comprobante.emisor.rfc", "RFC no coincide con CBB");
+    		}
+    		
+    		if(validation.hasErrors()) {
+    			for(Error error : validation.errors()) {
+    				Logger.info("@ " + error.message());
+    			}
+    			
+    			render("@index", comprobante);
+    		}
+    		
+    		comprobante.save();
+    		imprimir(comprobante.id);
     	} catch (Exception ex) {
-    		Logger.info(ex.getMessage());
-    		index();
+    		ex.printStackTrace();
+    		Logger.error(ex.getMessage());
+    		render("@index", comprobante);
     	}
     }
     
-    public static void impresion(Comprobante comprobante) {
+    public static void imprimir(Long id) {
+    	Comprobante comprobante = Comprobante.findById(id);
     	Options options = new Options();
 		options.filename = "emision.pdf";
-    	renderPDF("Application/emitir.html", comprobante);
+    	renderPDF(comprobante, options, "prueba");
+    }
+    
+    public static void leerImagen(Long id) {
+    	CBB cbb = CBB.findById(id);
+    	response.setContentTypeIfNotSet(cbb.image.type());
+    	renderBinary(cbb.image.get());
     }
 }

@@ -104,13 +104,7 @@
 			<hr style="margin-top: -1px; />
 			<div id="concepto">
 				<p class="textoConcepto">
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-				Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-				when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-				It has survived not only five centuries, but also the leap into electronic typesetting, 
-				remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-				sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-				like Aldus PageMaker including versions of Lorem Ipsum.
+				${comprobante.conceptos[0].concepto}
 				</p>
 			</div>
 		</div>
@@ -122,21 +116,30 @@
 				<table class="datosDesglose">
 					<tr>
 						<td>Subtotal:</td>
-						<td class="datosDesgloseValor">${ comprobante.conceptos?.importe }$</td>
+						<td class="datosDesgloseValor">${ comprobante.subTotal }$</td>
 					</tr>
 					<tr>
 						<td>IVA:</td>
-						<td class="datosDesgloseValor">${ comprobante.conceptos?.importe }$</td>
+						<td class="datosDesgloseValor">${ comprobante.totalImpuestosTrasladados }$</td>
 					</tr>
 					<tr>
-						<td>Retenci√≥n IVA:</td>
-						<td class="datosDesgloseValor">${ comprobante.conceptos?.importe }$</td>
+						<td>Retenci&oacute;n IVA:</td>
+						<td class="datosDesgloseValor">${ comprobante.totalImpuestosRetenidos }$</td>
 					</tr>
 					<tr>
 						<td>Total:</td>
-						<td class="datosDesgloseValor">${ comprobante.conceptos?.importe }$</td>
+						<td class="datosDesgloseValor">${ comprobante.total }$</td>
 					</tr>
 				</table>
+			</div>
+			<div style="padding-top:150px;">
+			<div style="float:left;width:490px;text-align:justify;">
+				<p style="font-size:10px;">LA REPRODUCION APOCRIFA DE ESTE COMPROBANTE CONSTITUYE UN DELITO EN LOS TERMINOS DE LAS DISPOSICIONES FISCALES</p>
+				<p style="font-size:10px;">ESTE COMPROBANTE TENDRA UNA VIGENCIA DE DOS A—OS CONTADOS A PARTIR DE LA FECHA DE APROBACION DE LA ASIGNACION DE FOLIOS, LA CUAL ES: <strong>${comprobante.cbb.fechaVigencia}</strong></p>
+				<p style="font-size:10px">EFECTOS FISCALES AL PAGO</p>
+			</div>
+			<div style="float:left;margin-left:10px;width:185px;min-height:150px;border:1px solid red;">
+				<img src="@{Application.leerImagen(comprobante.cbb.id)}" />
 			</div>
 		</div>
 	</div>
